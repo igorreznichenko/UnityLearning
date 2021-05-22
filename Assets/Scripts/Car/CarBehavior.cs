@@ -9,28 +9,28 @@ public enum Place
 }
 [Serializable]
 public struct Wheel {
-    public GameObject wheel;
-    public WheelCollider collider;
-    public Place place;
+    public GameObject _wheel;
+    public WheelCollider _collider;
+    public Place _place;
 }
 public class CarBehavior : MonoBehaviour
 {
-    [SerializeField] float maxAcceleration = 100;
-    [SerializeField] float corner = 45;
-    [SerializeField] List<Wheel> wheels;
-    [SerializeField] Vector3 centerOfMass;
-    float axisY, axisX;
-    Rigidbody rb;
+    [SerializeField] float _maxAcceleration = 100;
+    [SerializeField] float _corner = 45;
+    [SerializeField] List<Wheel> _wheels;
+    [SerializeField] Vector3 _centerOfMass;
+    float _axisY, _axisX;
+    Rigidbody _rb;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
      //rb.centerOfMass = centerOfMass;
     }
 
     private void Update()
     {
-       axisY = Input.GetAxis("Vertical");
-       axisX = Input.GetAxis("Horizontal");
+       _axisY = Input.GetAxis("Vertical");
+       _axisX = Input.GetAxis("Horizontal");
        AnimateWheels();
     }
     private void LateUpdate()
@@ -42,29 +42,29 @@ public class CarBehavior : MonoBehaviour
     private void Move()
     {
        
-            foreach (var wheel in wheels)
+            foreach (var wheel in _wheels)
             {
-            wheel.collider.motorTorque = maxAcceleration * axisY * 500 * Time.deltaTime;
+            wheel._collider.motorTorque = _maxAcceleration * _axisY * Time.deltaTime;
             }
            
     }
     void Turn()
     {
-        foreach (var wheel in wheels)
+        foreach (var wheel in _wheels)
         { 
-            if (wheel.place == Place.Front)
-                wheel.collider.steerAngle = corner * axisX;
+            if (wheel._place == Place.Front)
+                wheel._collider.steerAngle = _corner * _axisX;
         }
     }
     void AnimateWheels()
     {
         Quaternion rotate;
         Vector3 position;
-        foreach (var wheel in wheels)
+        foreach (var wheel in _wheels)
         {
-            wheel.collider.GetWorldPose(out position, out rotate);
+            wheel._collider.GetWorldPose(out position, out rotate);
             //wheel.wheel.transform.position = position;
-            wheel.wheel.transform.rotation = rotate;
+            wheel._wheel.transform.rotation = rotate;
         }
     }
 }
