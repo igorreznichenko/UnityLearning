@@ -14,7 +14,22 @@ public class SaveScript : MonoBehaviour
         _message.text = "";
     }
 
+    public void OnLoad()
+    {
+        Load();
+    }
+
     public void OnSave()
+    {
+        Save();
+    }
+    IEnumerator ShowText(string message, float duration)
+    {
+        _message.text = message;
+        yield return new WaitForSeconds(duration);
+        _message.text = "";
+    }
+    public void OnWebSave()
     {
         _message.text = "Please wait";
         StartCoroutine("WebSave");
@@ -33,13 +48,10 @@ public class SaveScript : MonoBehaviour
         }
         _message.text = "";
     }
-    public void OnLoad() 
+    public void OnWebLoad() 
     {
         _message.text = "Please wait";
         StartCoroutine("WebLoad");
-     
-
-
     }
     IEnumerator WebLoad()
     {
@@ -65,6 +77,7 @@ public class SaveScript : MonoBehaviour
         //Serialization using playerPrefs
         Vector3 position = _player.transform.position;
         PlayerPrefs.SetString("Saving", JsonUtility.ToJson(position));
+        StartCoroutine(ShowText("Saved", 1));
     }
 
     private void Load()
@@ -82,7 +95,7 @@ public class SaveScript : MonoBehaviour
         {
             Vector3 position = JsonUtility.FromJson<Vector3>(PlayerPrefs.GetString("Saving"));
             _player.transform.position = position;
-
+            StartCoroutine(ShowText("Loaded", 1));
         }
 
     }

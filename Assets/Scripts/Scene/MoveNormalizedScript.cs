@@ -8,8 +8,8 @@ public class MoveNormalizedScript : MonoBehaviour
     Vector3 _normalized;
     private void Start()
     {
-        float magnitude = transform.position.magnitude;
-        _normalized = new Vector3(transform.position.x / magnitude, transform.position.y / magnitude, transform.position.z / magnitude);
+
+        _normalized = transform.position.normalized;
     }
 
     void Update()
@@ -18,6 +18,6 @@ public class MoveNormalizedScript : MonoBehaviour
     }
     private void Move()
     {
-        transform.Translate(_normalized * Time.deltaTime);
+        transform.Translate(_normalized *_speed* Time.deltaTime);
     }
 }

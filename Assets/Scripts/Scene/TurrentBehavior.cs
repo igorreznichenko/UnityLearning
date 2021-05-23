@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class TurrentBehavior : MonoBehaviour
 {
-    [SerializeField] Animator animator;
-    [SerializeField] Transform Turrel;
-    [SerializeField] Transform gunPosition;
-    [SerializeField] float bulletForce;
-    Transform target;
-    bool isDetected;
-    bool isShoting = false;
+    [SerializeField] Animator _animator;
+    [SerializeField] Transform _turrel;
+    [SerializeField] Transform _gunPosition;
+    [SerializeField] float _bulletForce;
+    [SerializeField] AudioSource _sound;
+    float _shotDuration = 0.5f;
+    float _bulletLifetime = 3f;
+    Transform _target;
+    bool _isDetected;
+    bool _isShoting = false;
     void Start()
     {
        
@@ -19,47 +22,55 @@ public class TurrentBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDetected)
+        if (_isDetected)
         {
-            Vector3 direction = target.position - Turrel.position;
-            Quaternion rotate = Quaternion.LookRotation(new Vector3(direction.x, direction.y, direction.z));
-            Turrel.rotation = Quaternion.Lerp(rotate,Turrel.rotation, 0.7f);
-            if (Turrel.rotation == rotate && !isShoting)
+            Vector3 direction = _target.position - _turrel.position;
+            Quaternion rotate = Quaternion.LookRotation(direction);
+            _turrel.rotation = Quaternion.Lerp(rotate,_turrel.rotation, 0.5f);
+            if (_turrel.rotation == rotate && !_isShoting)
             {
                 StartCoroutine("Shot");
             }
         } 
     }
-    IEnumerator Shot()
+    GameObject MakeBullet()
     {
-        isShoting = true;
         GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        bullet.transform.position = gunPosition.position;
+        bullet.transform.position = _gunPosition.position;
         bullet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         bullet.GetComponent<Renderer>().material.color = Color.red;
-        Rigidbody bulletrb = bullet.AddComponent<Rigidbody>();
-        bulletrb.velocity = bullet.transform.forward * bulletForce;
-
-        yield return new WaitForSeconds(0.1f);
-        isShoting = false;
+        bullet.AddComponent<Rigidbody>();
+        Destroy(bullet, _bulletLifetime);
+        return bullet;
+        
+    }
+    IEnumerator Shot()
+    {
+        _isShoting = true;
+        GameObject bullet = MakeBullet();
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        bulletRb.velocity = bullet.transform.forward * _bulletForce;
+        _sound.Play();
+        yield return new WaitForSeconds(_shotDuration);
+        _isShoting = false;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.tag == "Player")
         {
-            target = other.transform;
-            isDetected = true;
-            animator.enabled = false;
+            _target = other.transform;
+            _isDetected = true;
+            _animator.enabled = false;
         }
             
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "Player")
+        if (other.tag == "Player")
         {
-            isDetected = false;
-            animator.enabled = true;
-            target = null;
+            _isDetected = false;
+            _animator.enabled = true;
+            _target = null;
         }
     }
 }

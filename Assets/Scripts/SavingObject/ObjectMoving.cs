@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class Test : MonoBehaviour
+public class ObjectMoving : MonoBehaviour
 {
     [SerializeField] float _speed;
     Rigidbody _rb;

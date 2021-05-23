@@ -18,14 +18,14 @@ public class BounceBallBehavior : MonoBehaviour
 
     private void ShowDistance()
     {
-        var startPoint = _sphereCollider.bounds.center - new Vector3(0, _sphereCollider.radius, 0);
+        var startPoint = _sphereCollider.bounds.center;
 
-        Ray ballRay = new Ray(startPoint, Vector3.down);
+        Ray ballRay = new Ray(startPoint, -transform.up);
         RaycastHit raycastHit = new RaycastHit();
         Physics.Raycast(ballRay, out raycastHit);
         float distance = Vector3.Distance(transform.position, raycastHit.point);
 
-        //Debug.Log("Distance: " + distance);
+       //Debug.Log("Distance: " + distance);
     
         
         

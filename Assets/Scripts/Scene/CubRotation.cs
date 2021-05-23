@@ -14,11 +14,7 @@ public class CubRotation : MonoBehaviour
     void Update()
     {
         RotateByQuat();
-        if(Input.GetKey(KeyCode.R))
-            RotateByQuat();
-
-        if (Input.GetKey(KeyCode.T))
-            RotateByEuler();
+        //RotateByEuler();
 
     }
     void RotateByQuat()
@@ -29,7 +25,7 @@ public class CubRotation : MonoBehaviour
     }
     void RotateByEuler()
     {
-        Quaternion rotate = Quaternion.Euler(0, _angle, 0);
+        Quaternion rotate = Quaternion.Euler(0, (_angle / 60f) * Time.deltaTime, 0);
         transform.rotation *= rotate;
     }
 }

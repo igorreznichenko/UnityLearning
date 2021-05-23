@@ -13,7 +13,6 @@ public class StaticObjectBehavior : MonoBehaviour
         RaycastHit raycastHit = new RaycastHit();
         Ray ray = new Ray(other.transform.position, Vector3.down);
         Physics.Raycast(ray, out raycastHit);
-        Debug.Log(raycastHit.collider.gameObject.name);
     }
 }
 

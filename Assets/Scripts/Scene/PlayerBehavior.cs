@@ -8,52 +8,21 @@ public class PlayerBehavior : MonoBehaviour
     Rigidbody _rb;
     [SerializeField] float _speed;
     [SerializeField] float _jump;
-    [SerializeField] float _force = 20;
-    [SerializeField] float _timeDelay = 0.7f;
     bool _canJump = false;
     float _dTime;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _dTime = Time.time;
-        Cursor.lockState = CursorLockMode.None;
-        UnityEngine.Object[] Objects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
-        foreach (var item in Objects)
-        {
-            if (item.name == "Cylinder")
-                Instantiate(item);
-        }
-        Resources.UnloadUnusedAssets();
-        Debug.Log(Objects.Length);
-
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _dTime - Time.time <=0f){
-            Fire();
-            _dTime = Time.time + _timeDelay;
-        }
         Move();
-        
     }
 
-    private void Fire()
-    {
-        RaycastHit raycastHit;
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(ray.origin, ray.direction, out raycastHit))
-        {
-            Rigidbody rigidbody = raycastHit.rigidbody;
-            if (rigidbody)
-            {
-                rigidbody.AddForce((raycastHit.point - Camera.main.transform.position)*_force);
-            }
-            Debug.DrawLine(Camera.main.transform.position, raycastHit.point);
-        }
-    }
 
     private void Move()
     {
@@ -61,9 +30,9 @@ public class PlayerBehavior : MonoBehaviour
         {
             Debug.Log(Input.GetAxis("Vertical"));
             float moveAcceleration = Input.GetAxis("Vertical");
-            Vector3 forward = transform.forward * _speed * moveAcceleration * Time.deltaTime;
+            Vector3 forward = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+            forward *= _speed * moveAcceleration * Time.fixedDeltaTime;
             _rb.MovePosition(transform.position + forward);
-            Debug.Log("forward: "+transform.forward);
             
            
         }
@@ -72,7 +41,8 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
             float moveAcceleration = Input.GetAxis("Horizontal");
-            _rb.velocity = transform.right * _speed* moveAcceleration;
+            Vector3 forward = Camera.main.transform.right * _speed * moveAcceleration * Time.fixedDeltaTime;
+            _rb.MovePosition(transform.position + forward);
 
         }
         if (Input.GetKey(KeyCode.Space) && _canJump)
