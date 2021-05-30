@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6f0b78ad65e9abd479ea186df2c411c0
+  m_SerializeEntries:
+  - m_GUID: 1484afa7b2e3df34eacc4a08a5d07230
+    m_Address: Assets/Prefabs/Ball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 4242720166118062109, guid: 1484afa7b2e3df34eacc4a08a5d07230,
+      type: 3}
+    m_TargetAsset: {fileID: 4242720166118062109, guid: 1484afa7b2e3df34eacc4a08a5d07230,
+      type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 29121f2e80e98564dbc4ad7558ebefa4, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 66314e619dc3a114dbe28618ef616462, type: 2}
+    - {fileID: 11400000, guid: 2688f0152c599b643b419829833371f1, type: 2}

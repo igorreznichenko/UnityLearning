@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StaticObjectBehavior : MonoBehaviour
+namespace Scene2.StaticObject
 {
-    int _countPassingThrough = 0;
-
-    private void OnTriggerExit(Collider other)
+    public class StaticObjectBehavior : MonoBehaviour
     {
-        _countPassingThrough++;
-        Debug.Log("Passing through: " + _countPassingThrough + " Times");
-        RaycastHit raycastHit = new RaycastHit();
-        Ray ray = new Ray(other.transform.position, Vector3.down);
-        Physics.Raycast(ray, out raycastHit);
+        int _countPassingThrough = 0;
+
+        private void OnTriggerExit(Collider other)
+        {
+            _countPassingThrough++;
+            Debug.Log("Passing through: " + _countPassingThrough + " Times");
+            RaycastHit raycastHit = new RaycastHit();
+            Ray ray = new Ray(other.transform.position, Vector3.down);
+            Physics.Raycast(ray, out raycastHit);
+
+        }
     }
 }
-

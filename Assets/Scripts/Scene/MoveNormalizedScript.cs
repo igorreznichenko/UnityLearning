@@ -1,23 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MoveNormalizedScript : MonoBehaviour
+namespace Scene1.Moving
 {
-    [SerializeField] float _speed;
-    Vector3 _normalized;
-    private void Start()
+    public class MoveNormalizedScript : MonoBehaviour
     {
+        [SerializeField] private float _speed;
+        Vector3 _normalized;
+        private void Start()
+        {
+            _normalized = transform.position.normalized;
+        }
 
-        _normalized = transform.position.normalized;
-    }
+        private void Update()
+        {
+            Move();
+        }
 
-    void Update()
-    {
-        Move();
-    }
-    private void Move()
-    {
-        transform.Translate(_normalized *_speed* Time.deltaTime);
+        private void Move()
+        {
+            transform.Translate(_normalized * _speed * Time.deltaTime);
+        }
     }
 }

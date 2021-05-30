@@ -1,25 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class LoadPrefabs : MonoBehaviour
+﻿using UnityEngine;
+namespace Scene1.LoadingResources
 {
-    // Start is called before the first frame update
-    void Start()
+    public class LoadPrefabs : MonoBehaviour
     {
-        
-    }
-    void CreateCylinder()
-    {
-        UnityEngine.Object[] Objects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
-        foreach (var item in Objects)
+        private void CreateCylinder()
         {
-            if (item.name == "Cylinder")
+            UnityEngine.Object[] Objects = Resources.FindObjectsOfTypeAll(typeof(GameObject));
+            foreach (var item in Objects)
             {
-                Instantiate(item);
-                break;
+                if (item.name == "Cylinder")
+                {
+                    Instantiate(item);
+                    break;
+                }
             }
+            Resources.UnloadUnusedAssets();
         }
-        Resources.UnloadUnusedAssets();
     }
 }

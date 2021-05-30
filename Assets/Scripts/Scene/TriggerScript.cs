@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TriggerScript : MonoBehaviour
+namespace Scene1.Trigger
 {
-    [SerializeField] float _force = 10f;
-    private void OnTriggerStay(Collider other)
+    public class TriggerScript : MonoBehaviour
     {
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-        if (rb)
+        [SerializeField] float _force = 10f;
+        private void OnTriggerStay(Collider other)
         {
-            rb.AddForce(Vector3.up * _force);
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                rb.AddForce(Vector3.up * _force);
+            }
         }
     }
 }

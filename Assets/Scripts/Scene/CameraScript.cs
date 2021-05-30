@@ -1,36 +1,35 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CameraScript : MonoBehaviour
+namespace Scene1.CameraOptions
 {
-    public float sensitivity;
-    [SerializeField] Vector3 _distance;
-    Quaternion _initialRotation;
-    float angleX = 0;
-    float angleY = 0;
-    void Start()
+    public class CameraScript : MonoBehaviour
     {
-        _initialRotation = transform.rotation;
+        public float sensitivity;
+        [SerializeField] private Vector3 _distance;
+        private Quaternion _initialRotation;
+        private float angleX = 0;
+        private float angleY = 0;
+        void Start()
+        {
+            _initialRotation = transform.rotation;
+        }
+
+        private void Update()
+        {
+            Turn();
+        }
+
+        private void Turn()
+        {
+            float rX = Input.GetAxis("Mouse X") * sensitivity;
+            float rY = Input.GetAxis("Mouse Y") * sensitivity;
+            angleX += rX;
+            angleY += rY;
+            angleY = Mathf.Clamp(angleY, -60, 60);
+            Quaternion rotationX = Quaternion.AngleAxis(angleX, Vector3.up);
+            Quaternion rotationY = Quaternion.AngleAxis(-angleY, Vector3.right);
+            transform.rotation = _initialRotation * rotationX * rotationY;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Turn();   
-    }
-
-
-    private void Turn()
-    {
-        float rX = Input.GetAxis("Mouse X") * sensitivity;
-        float rY = Input.GetAxis("Mouse Y") * sensitivity;
-        angleX += rX;
-        angleY += rY;
-        angleY = Mathf.Clamp(angleY, -60, 60);
-       Quaternion rotationX = Quaternion.AngleAxis(angleX, Vector3.up);
-       Quaternion rotationY = Quaternion.AngleAxis(-angleY, Vector3.right);
-       transform.rotation =_initialRotation *rotationX* rotationY;
-    }
 }

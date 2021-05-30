@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 2823649691
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a31460f3172a75de11ae871395d569af
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b01a4c2bb8f3d428744762cf9a7b800f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1d9e3282de426b644b71be8e5b6dfd31, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 75f18966cd5681b46af4834193842616, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 146
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/Car Black Variant.prefab
+Dependencies: []
